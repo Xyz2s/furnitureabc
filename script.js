@@ -1,27 +1,24 @@
-// Get DOM elements
+// Toggle navigation menu
 const navToggle = document.getElementById('navToggle');
 const navLinks = document.getElementById('navLinks');
 
-// Toggle navigation menu
 navToggle.addEventListener('click', () => {
     navLinks.classList.toggle('active');
 });
 
-// Close menu when clicking outside
 document.addEventListener('click', (e) => {
     if (!navToggle.contains(e.target) && !navLinks.contains(e.target)) {
         navLinks.classList.remove('active');
     }
 });
 
-// Close menu when clicking on a link
 navLinks.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => {
         navLinks.classList.remove('active');
     });
 });
 
-// Smooth scrolling for navigation links
+// Smooth scroll
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -35,13 +32,12 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Active link highlighting
+// Active nav link on scroll
 window.addEventListener('scroll', () => {
     const sections = document.querySelectorAll('section');
     const navItems = document.querySelectorAll('.nav-links a');
-    
     let current = '';
-    
+
     sections.forEach(section => {
         const sectionTop = section.offsetTop;
         const sectionHeight = section.clientHeight;
@@ -56,4 +52,19 @@ window.addEventListener('scroll', () => {
             item.classList.add('active');
         }
     });
-}); 
+});
+
+// Read More toggle
+document.querySelectorAll('.read-more').forEach(button => {
+    button.addEventListener('click', (e) => {
+        e.preventDefault();
+        const moreText = button.previousElementSibling;
+        if (moreText.style.display === 'none' || moreText.style.display === '') {
+            moreText.style.display = 'block';
+            button.textContent = 'Read Less';
+        } else {
+            moreText.style.display = 'none';
+            button.textContent = 'Read More';
+        }
+    });
+});
